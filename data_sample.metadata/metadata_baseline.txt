@@ -1,0 +1,11 @@
+location	date	latitude	longitude	Spawning	Region	subregion	spawning_month	population	code	dummy_date	julian_date	reporting_group
+Squaxin Pass	2/24/2014	47.2	-122.94	primary spawner	Washington	Salish Sea	February	Squa14	1	2/24/2018	54	Jan-Feb
+Squaxin Pass 2007	1/17/2007	47.2	-122.94	primary spawner	Washington	Salish Sea	January	Case07	1*	1/17/2018	16	Jan-Feb
+Elliot Bay	4/15/2015	47.615	-122.356	primary spawner	Washington	Salish Sea	April	ElBy15	2*	4/15/2018	104	Mar-Apr
+Port Orchard	1/27/2014	47.69	-122.59	primary spawner	Washington	Salish Sea	January	Port14	3	1/27/2018	26	Mar-Apr
+Quilcene Bay	3/26/2014	47.801	-122.858	primary spawner	Washington	Salish Sea	March	QlBy14	4	3/26/2018	84	Mar-Apr
+Port Gamble	3/12/2014	47.869	-122.601	primary spawner	Washington	Salish Sea	February	PtGb14	5	3/12/2018	70	Mar-Apr
+Similk Bay	2/25/2015	48.444	-122.567	primary spawner	Washington	Salish Sea	February	SmBy15	6	2/25/2018	55	Jan-Feb
+Cherry Point	5/9/2016	48.932	-122.798	late spawner	Washington	Salish Sea	May	ChPt16	7*	5/9/2018	128	May
+Cherry Point 2014	5/12/2014	48.932	-122.798	late spawner	Washington	Salish Sea	May	ChPt14	7	5/12/2018	131	May
+Gabriola Island	3/19/2015	49.163	-123.74	primary spawner	British Columbia	Salish Sea	March	Gabr15	8	3/19/2018	77 Mar-Apr

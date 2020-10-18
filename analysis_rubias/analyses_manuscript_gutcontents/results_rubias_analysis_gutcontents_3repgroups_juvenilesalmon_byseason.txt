@@ -1,0 +1,7 @@
+mixture_collection	repunit	repprop	loCI	hiCI	repprop_round
+spring	Jan_Feb	0.035144542193039	0	0.11	0.035
+spring	Mar_Apr	0.959800812291935	0.884	0.999	0.96
+spring	May_Jun	0.00505464551502446	0	0.024	0.005
+summer	Jan_Feb	0.182425281278193	0.038	0.362	0.182
+summer	Mar_Apr	0.812064498036666	0.634	0.958	0.812
+summer	May_Jun	0.00551022068514033	0	0.027	0.006
