@@ -1,6 +1,6 @@
 # Analysis of Chinook salmon gut contents
 
-![salmon-img](https://github.com/EleniLPetrou/gut_contents_manuscript/blob/master/images/salmon.jpg)
+![salmon-img](https://github.com/EleniLPetrou/gut_contents_manuscript/blob/master/images/salmon.jpg?raw=true)
 
 This repository contains the scripts that were used in the manuscript *"Phenological diversity of a prey species supports life-stage specific foraging opportunity for a mobile consumer"*.
 
