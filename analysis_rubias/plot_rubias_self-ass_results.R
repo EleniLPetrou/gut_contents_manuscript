@@ -23,6 +23,7 @@ val_df<- read.delim(validation_file, header = TRUE, sep = "\t")
 ################################################################################
 # Plot the data
 my_cols <- c("#2b83ba","#abdda4",  "#fdae61") #set some colors
+mylabel1 = c(Jan_Feb = "Jan-Feb", Mar_Apr=  "Mar-Apr", May_Jun = "May")
 
 # Make a plot of the GSI simulation results - linear regression
 plotA <- ggplot(mixsim_3repgrp_df, aes(x = true_repprop, y = reprop_posterior_mean, colour = repunit)) +
@@ -30,13 +31,16 @@ plotA <- ggplot(mixsim_3repgrp_df, aes(x = true_repprop, y = reprop_posterior_me
   geom_abline(intercept = 0, slope = 1) +
   xlab("Simulated mixing proportion") +
   ylab("Estimated mixing proportion")+
-  facet_wrap(~ repunit) +
-  scale_color_manual(name = "Reporting group", values = my_cols)+
+  facet_wrap(~ repunit, labeller=labeller(repunit = mylabel1)) +
   theme_bw()+
   theme(legend.position = "none")+
-  theme(axis.text.x = element_text(angle = 90))
+  theme(axis.text.x = element_text(angle = 90))+
+  scale_colour_manual(name = "Reporting group",labels = c("Jan-Feb", "Mar-Apr", "May"), values = my_cols)
 
 plotA
+
+mixsim_3repgrp_df$repunit
+
 
 # Make a boxplot of GSI 100% simulations
 
@@ -60,8 +64,9 @@ mylabels = c(ElBy13 = "Elliot Bay, April 2013", Marr15=  "Cherry Point, May 2014
 
 # Order the label factor in a specific way
 
-plotting_df$mixture_collection <- factor(plotting_df$mixture_collection, levels = c("Squa14", "ElBy13", "Marr15"))
+val_df$mixture_collection <- factor(val_df$mixture_collection, levels = c("Squa14", "ElBy13", "Marr15"))
 
+# unstacked barplots, with error bars
 
 plotC <- ggplot(data = val_df, 
                           aes(x = "", 
