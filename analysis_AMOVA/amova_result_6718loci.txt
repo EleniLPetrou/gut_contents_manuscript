@@ -1,0 +1,36 @@
+$call
+ade4::amova(samples = xtab, distances = xdist, structures = xstruct)
+
+$results
+                                        Df     Sum Sq   Mean Sq
+Between reporting_group                  2   6185.868 3092.9341
+Between samples Within reporting_group   6   5243.835  873.9725
+Within samples                         322 243241.926  755.4097
+Total                                  330 254671.630  771.7322
+
+$componentsofcovariance
+                                                        Sigma           %
+Variations  Between reporting_group                 20.453707   2.6247958
+Variations  Between samples Within reporting_group   3.386033   0.4345249
+Variations  Within samples                         755.409708  96.9406793
+Total variations                                   779.249448 100.0000000
+
+$statphi
+                                    Phi
+Phi-samples-total           0.030593207
+Phi-samples-reporting_group 0.004462377
+Phi-reporting_group-total   0.026247958
+
+class: krandtest lightkrandtest 
+Monte-Carlo tests
+Call: randtest.amova(xtest = amova_ade4, nrepet = 999)
+
+Number of tests:   3 
+
+Adjustment method for multiple comparisons:   none 
+Permutation number:   999 
+                                Test        Obs    Std.Obs   Alter Pvalue
+1          Variations within samples 755.409708 -54.345249    less  0.001
+2         Variations between samples   3.386033  11.291825 greater  0.001
+3 Variations between reporting_group  20.453707   3.681497 greater  0.001
+

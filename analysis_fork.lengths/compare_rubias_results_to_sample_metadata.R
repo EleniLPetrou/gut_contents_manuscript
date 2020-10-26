@@ -33,15 +33,21 @@ head(post_ads_df)
 # Process the data - juvenile salmon
 
 # Combine the rubias results and sample metadata
-juv_plotting_df <- dplyr :: left_join(post_juv_df, meta_df, by = c("indiv" = "genetics_id"))%>%
+juv_df <- dplyr :: left_join(post_juv_df, meta_df, by = c("indiv" = "genetics_id"))%>%
   filter(herring_length_mm != "NA") %>%
   mutate(herring_length_cm = herring_length_mm/10)
 
 # Plot the juvenile salmon data
+# Subset the data into layers for plotting
+janfeb_juvs <- juv_df %>%
+  filter(repunit == "Jan_Feb")
 
+marapr_juvs<- juv_df %>%
+  filter(repunit == "Mar_Apr")
 
-plot1<- ggplot(juv_plotting_df, aes(salmon_length_cm, herring_length_cm, shape = repunit, color = sum_post)) + 
-  geom_jitter(width = 1, height = 1, size = 4, alpha = 0.6)+
+plot1 <- ggplot( ) + 
+  geom_jitter(data = marapr_juvs, aes(salmon_length_cm, herring_length_cm, shape = repunit, color = sum_post), width = 1, height = 1, size = 4, alpha = 0.7)+
+  geom_jitter(data = janfeb_juvs, aes(salmon_length_cm, herring_length_cm, shape = repunit, color = sum_post), width = 1, height = 1, size = 4, alpha = 0.7)+
   facet_wrap(~mixture_collection)+
   xlim(0,25)+
   ylim(0,10)+
@@ -57,17 +63,17 @@ plot1
 ## Linear regression on the results
 
 # For all juveniles
-linearMod1 <- lm(herring_length_cm ~ salmon_length_cm, data= juv_plotting_df2)  # build linear regression model on full data
+linearMod1 <- lm(herring_length_cm ~ salmon_length_cm, data= juv_df)  # build linear regression model on full data
 print(linearMod1)
 summary(linearMod1) #Adjusted R-squared:  0.009523 
 #F-statistic: 1.692 on 1 and 71 DF,  p-value: 0.1975
 
 # For juveniles by season
 
-spring_juvs <- juv_plotting_df2 %>%
+spring_juvs <- juv_df %>%
   filter(mixture_collection == "spring")
 
-summer_juvs <- juv_plotting_df2 %>%
+summer_juvs <- juv_df %>%
   filter(mixture_collection == "summer")
 
 linearMod2 <- lm(herring_length_cm ~ salmon_length_cm, data= spring_juvs)  # build linear regression model on full data
@@ -80,22 +86,34 @@ print(linearMod3)
 summary(linearMod3) #Adjusted R-squared:  -0.03557 
 #F-statistic: 0.03834 on 1 and 27 DF,  p-value: 0.8462 
 
+
 #####################################################################################
 # Process the data - adult salmon
 
 # Combine the rubias results and sample metadata
-ads_plotting_df <- dplyr :: left_join(post_ads_df, meta_df, by = c("indiv" = "genetics_id")) %>%
+adult_df <- dplyr :: left_join(post_ads_df, meta_df, by = c("indiv" = "genetics_id")) %>%
   filter(herring_length_mm != "NA") %>%
   mutate(herring_length_cm = herring_length_mm/10)
 
 
-head(ads_plotting_df)
+head(adult_df)
 
 # make a plot
 
+janfeb_ads <- adult_df %>%
+  filter(repunit == "Jan_Feb")
 
-plot2<- ggplot(ads_plotting_df, aes(salmon_length_cm, herring_length_cm, shape = repunit, color = sum_post)) + 
-  geom_jitter(width = 1, height = 1, size = 4, alpha = 0.6)+
+marapr_ads<- adult_df %>%
+  filter(repunit == "Mar_Apr")
+
+may_ads<- adult_df %>%
+  filter(repunit == "May_Jun")
+
+
+plot2 <- ggplot( ) + 
+  geom_jitter(data = marapr_ads, aes(salmon_length_cm, herring_length_cm, shape = repunit, color = sum_post), width = 1, height = 1, size = 4, alpha = 0.7)+
+  geom_jitter(data = janfeb_ads, aes(salmon_length_cm, herring_length_cm, shape = repunit, color = sum_post), width = 1, height = 1, size = 4, alpha = 0.7)+
+  geom_jitter(data = may_ads, aes(salmon_length_cm, herring_length_cm, shape = repunit, color = sum_post), width = 1, height = 1, size = 4, alpha = 0.7)+
   facet_wrap(~mixture_collection)+
   xlim(0,100)+
   ylim(0,25)+
@@ -108,23 +126,24 @@ plot2<- ggplot(ads_plotting_df, aes(salmon_length_cm, herring_length_cm, shape =
 plot2
 
 
+
 ## Linear regression on the results
 
 # For all adults
-linearMod4 <- lm(herring_length_cm ~ salmon_length_cm, data= ads_plotting_df)  # build linear regression model on full data
+linearMod4 <- lm(herring_length_cm ~ salmon_length_cm, data= adult_df)  # build linear regression model on full data
 print(linearMod4)
 summary(linearMod4) #Adjusted R-squared:  0.006495 
 #F-statistic: 3.321 on 1 and 354 DF,  p-value: 0.06924
 
 
 # For adults by season
-spring_ads <- ads_plotting_df %>%
+spring_ads <- adult_df %>%
   filter(mixture_collection == "spring")
 
-summer_ads <- ads_plotting_df %>%
+summer_ads <- adult_df %>%
   filter(mixture_collection == "summer")
 
-winter_ads <- ads_plotting_df %>%
+winter_ads <- adult_df %>%
   filter(mixture_collection == "winter")
 
 linearMod5 <- lm(herring_length_cm ~ salmon_length_cm, data= spring_ads)  # build linear regression model on full data
@@ -151,6 +170,7 @@ final_plot <- plot_grid(
   nrow = 2,
   align="v")
 
+final_plot
 #####################################################################################
 # Save the plot to pdf file
 
